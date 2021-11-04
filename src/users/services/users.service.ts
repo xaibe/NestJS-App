@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
-import { User } from './entities/user.entity';
+import { CreateUserDto } from '../models/dto/create-user.dto';
+import { User } from '../models/user.entity';
 
 @Injectable()
 export class UsersService {
@@ -17,7 +17,7 @@ export class UsersService {
 
   findById(userId: number): User {
     // eslint-disable-next-line prettier/prettier
-    return this.users.find( item => item.id === userId);
+    return this.users.find((item) => item.id === userId);
   }
   createUser(CreateUserDto: CreateUserDto): User {
     const newUser = {
