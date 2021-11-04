@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { from, Observable } from 'rxjs';
-import { Repository, UpdateResult } from 'typeorm';
+import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 import { FeedPostEntity } from '../models/post.entity';
 import { CreateFeedDto } from '../dto/create-feed.dto';
 import { UpdateFeedDto } from '../dto/update-feed.dto';
@@ -25,5 +25,9 @@ export class FeedService {
     updatefeedDto: UpdateFeedDto,
   ): Observable<UpdateResult> {
     return from(this.feedPostRepository.update(id, updatefeedDto));
+  }
+
+  deletePost(id: number): Observable<DeleteResult> {
+    return from(this.feedPostRepository.delete(id));
   }
 }
