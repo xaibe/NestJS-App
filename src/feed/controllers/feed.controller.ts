@@ -1,14 +1,17 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Post, Get, Put, Param } from '@nestjs/common';
 import {
   ApiBadRequestResponse,
   ApiBody,
   ApiCreatedResponse,
+  ApiOkResponse,
   ApiTags,
 } from '@nestjs/swagger';
 import { Observable } from 'rxjs';
+import { UpdateResult } from 'typeorm';
 import { FeedPostEntity } from '../models/post.entity';
-import { FeedPost } from '../models/post.interface';
+import { CreateFeedDto } from '../dto/create-feed.dto';
 import { FeedService } from '../services/feed.service';
+import { UpdateFeedDto } from '../dto/update-feed.dto';
 @ApiTags('feed')
 @Controller('feed')
 export class FeedController {
@@ -17,7 +20,23 @@ export class FeedController {
   @ApiCreatedResponse({ type: FeedPostEntity })
   @ApiBadRequestResponse()
   @Post('create')
-  create(@Body() post: FeedPost): Observable<FeedPost> {
+  create(@Body() post: CreateFeedDto): Observable<CreateFeedDto> {
     return this.feedService.createPost(post);
+  }
+
+  @ApiOkResponse({ type: FeedPostEntity, isArray: true })
+  @Get('all')
+  findAll(): Observable<CreateFeedDto[]> {
+    return this.feedService.findAllPosts();
+  }
+
+  @ApiBody({ schema: { example: { post: FeedPostEntity } } })
+  @ApiBadRequestResponse()
+  @Put('update/:id')
+  updatefeed(
+    @Param('id') id: number,
+    @Body() updatefeedDto: UpdateFeedDto,
+  ): Observable<UpdateResult> {
+    return this.feedService.updatePost(id, updatefeedDto);
   }
 }
