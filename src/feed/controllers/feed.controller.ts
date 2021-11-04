@@ -1,4 +1,12 @@
-import { Body, Controller, Post, Get, Put, Param } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Post,
+  Get,
+  Put,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import {
   ApiBadRequestResponse,
   ApiBody,
@@ -7,7 +15,7 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { Observable } from 'rxjs';
-import { UpdateResult } from 'typeorm';
+import { DeleteResult, UpdateResult } from 'typeorm';
 import { FeedPostEntity } from '../models/post.entity';
 import { CreateFeedDto } from '../dto/create-feed.dto';
 import { FeedService } from '../services/feed.service';
@@ -38,5 +46,11 @@ export class FeedController {
     @Body() updatefeedDto: UpdateFeedDto,
   ): Observable<UpdateResult> {
     return this.feedService.updatePost(id, updatefeedDto);
+  }
+
+  @ApiBadRequestResponse()
+  @Delete(':id')
+  delete(@Param('id') id: number): Observable<DeleteResult> {
+    return this.feedService.deletePost(id);
   }
 }
