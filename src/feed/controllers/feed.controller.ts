@@ -17,9 +17,9 @@ import {
 import { Observable } from 'rxjs';
 import { DeleteResult, UpdateResult } from 'typeorm';
 import { FeedPostEntity } from '../models/post.entity';
-import { CreateFeedDto } from '../dto/create-feed.dto';
+import { CreateFeedDto } from '../models/dto/create-feed.dto';
 import { FeedService } from '../services/feed.service';
-import { UpdateFeedDto } from '../dto/update-feed.dto';
+import { UpdateFeedDto } from '../models/dto/update-feed.dto';
 @ApiTags('feed')
 @Controller('feed')
 export class FeedController {
