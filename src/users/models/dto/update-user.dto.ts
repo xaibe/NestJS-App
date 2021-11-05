@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { ApiProperty } from '@nestjs/swagger';
 import { IsAlphanumeric, MaxLength } from 'class-validator';
-export class CreateUserDto {
+export class UpdateUserDto {
   @ApiProperty()
   @IsAlphanumeric()
   @MaxLength(10)
