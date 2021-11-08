@@ -21,6 +21,10 @@ export class UsersService {
     return from(this.userRepository.findOne(userId));
   }
 
+  async findOne(email: string): Promise<User> {
+    return this.userRepository.findOne({ where: { email } });
+  }
+
   createUser(CreateUserDto: CreateUserDto): Observable<User> {
     return from(this.userRepository.save(CreateUserDto));
   }
