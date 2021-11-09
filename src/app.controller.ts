@@ -30,21 +30,4 @@ export class AppController {
   getHello(): string {
     return this.appService.getHello();
   }
-
-  @ApiCreatedResponse({ type: LoginUserDto })
-  @ApiBadRequestResponse()
-  @UseGuards(JwtAuthGuard)
-  @ApiBearerAuth()
-  @Get('profile')
-  getProfile(@Request() req) {
-    return req.user;
-  }
-
-  @ApiCreatedResponse({ type: LoginUserDto })
-  @ApiBadRequestResponse()
-  @UseGuards(LocalAuthGuard)
-  @Post('auth/login')
-  async login(@Request() req, @Body() body: LoginUserDto) {
-    return this.authService.login(req.user);
-  }
 }
