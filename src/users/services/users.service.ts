@@ -33,7 +33,7 @@ export class UsersService {
     return from(this.userRepository.delete(id));
   }
 
-  updateUser(
+  updateUserToNewBranch(
     id: number,
     updateUserDto: UpdateUserDto,
   ): Observable<UpdateResult> {
